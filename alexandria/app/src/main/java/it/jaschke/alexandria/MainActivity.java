@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -138,17 +137,19 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
         Bundle args = new Bundle();
         args.putString(BookDetail.EAN_KEY, ean);
 
-        BookDetail fragment = new BookDetail();
-        fragment.setArguments(args);
-
-        int id = R.id.container;
-        if(findViewById(R.id.right_container) != null){
-            id = R.id.right_container;
+        if (findViewById(R.id.right_container) != null) {
+            int id = R.id.right_container;
+            BookDetail fragment = new BookDetail();
+            fragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(id, fragment)
+                    .addToBackStack("Book Detail")
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, BookDetailsActivity.class);
+            intent.putExtras(args);
+            startActivity(intent);
         }
-        getSupportFragmentManager().beginTransaction()
-                .replace(id, fragment)
-                .addToBackStack("Book Detail")
-                .commit();
 
     }
 
