@@ -1,5 +1,6 @@
 # SuperDuo
 *Project 3: Super Duo*
+Android Nanodegree
 
 - Alexandria has barcode scanning functionality.
 - Alexandria does not crash while searching for a book without an internet connection.
